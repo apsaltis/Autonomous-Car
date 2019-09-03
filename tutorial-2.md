@@ -25,20 +25,15 @@ CEM also allows you to granularly deploy models to every different type of devic
 
 We will use Cloudera Edge Manager (CEM) to build a MiNiFi dataflow in the interactive UI and publish it to the MiNiFi agent running on the edge. This dataflow will ingest the car sensor data coming from ROS and push it to NiFi running in the cloud.
 
-## Prerequisites
 
-- Deployed MiNiFi C++ agent on AWS EC2 Ubuntu 18.04 instance or Jetson TX2
-  - AWS: t2.micro or similar minimum
-- Deployed CEM on a Cloudera DataFlow cluster
-- Deployed a CDP Cluster with CDSW
 
 ## Build Data Flow for MiNiFi via CEM UI
 
 To begin you will need to change your MiNiFi configurations, if you are working with a new MiNiFi Agent copy these configuration files
 
 ~~~bash
-wget -O ~/Downloads/minifi.properties https://raw.githubusercontent.com/james94/Autonomous-Car/master/documentation/assets/services/minifi_cpp/minifi.properties
-scp -i /path/tp/pem ~/Downloads/minifi.properties <os-name>@<ec2-public-dns>:/home/ubuntu/nifi-minifi-cpp-0.6.0/conf
+sudo su - 
+systemctl start minifi
 ~~~
 
 Open your CEM UI at `<cloud-vm-public-dns:10080/efm>`, if your `minifi.properties` configuration file is setup correctly you will find that your agent is sending heartbeats to the monitor events section of CEM UI
@@ -75,7 +70,7 @@ Double click on GetFile to configure. Scroll to **Properties**, add the properti
 
 | Property  | Value  |
 |:---|---:|
-| `Input Directory`  | `/tmp/csdv/data/input/racetrack/image`  |
+| `Input Directory`  | `/csdv/data/input/lidar_scan`  |
 | `Keep Source File`  | `false`  |
 | `Recurse Subdirectories` | `false` |
 
@@ -114,7 +109,7 @@ Double click on GetFile to configure. Scroll to **Properties**, add the properti
 
 | Property  | Value  |
 |:---|---:|
-| `Input Directory`  | `/tmp/csdv/data/input/racetrack/image/logitech`  |
+| `Input Directory`  | `/csdv/data/input/lidar_scan/cam_data`  |
 | `Keep Source File`  | `false`  |
 
 ### Push Image Data to Remote NiFi Instance

@@ -109,7 +109,7 @@ Double click on GetFile to configure. Scroll to **Properties**, add the properti
 
 | Property  | Value  |
 |:---|---:|
-| `Input Directory`  | `/csdv/data/input/lidar_scan/cam_data`  |
+| `Input Directory`  | `/csdv/data/input/cam_data`  |
 | `Keep Source File`  | `false`  |
 
 ### Push Image Data to Remote NiFi Instance
